@@ -111,7 +111,7 @@ function Footer() {
 
       {/* Bottom Bar */}
       <div className="mt-10 border-t border-green-700 pt-6 text-center text-sm text-green-300">
-        © {new Date().getFullYear()} Nepal Digital Bazar. All rights reserved.
+        ©{new Date().getFullYear()} Nepal Digital Bazar. All rights reserved.
       </div>
     </footer>
   );

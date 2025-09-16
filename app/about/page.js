@@ -3,19 +3,10 @@ import Image from "next/image";
 
 function About() {
   return (
-    <main className="text-text sm:text-md my-10 grid place-content-center items-center gap-10 px-6 py-4">
+    <main className="text-text sm:text-md my-6 grid place-content-center items-center gap-10 px-6 py-4 pb-6">
       {/* about us 1 */}
       <div className="flex flex-col flex-wrap items-center justify-center gap-10 md:flex-row">
         {/* image */}
-        {/* <Image
-          src={about1}
-          alt="about 1 picture"
-          placeholder="blur"
-          quality={100}
-          height="300"
-          width="300"
-          className="object-cover"
-        /> */}
         <div className="relative h-[300px] w-full max-w-lg md:h-[400px] md:min-w-lg">
           <Image
             src={about1}
@@ -73,29 +64,29 @@ function About() {
             making online shopping easy, secure, and enjoyable for every
             customer across Nepal.<br></br>
             <br></br>
-            <span className="text-primary font-bold">What sets us apart?</span>
-            <ol className="list-inside list-disc" type="a">
-              <li>
-                <strong> Handpicked Products:</strong> Only the best and most
-                reliable items make it to our shelves.
-              </li>
-              <li>
-                <strong>Affordable Pricing:</strong> We ensure you get
-                unbeatable value for your money.
-              </li>
-              <li>
-                <strong> Customer Satisfaction :</strong> Your happiness is our
-                top priority, and we back every purchase with care and service.
-              </li>
-            </ol>
-            <br></br>
-            Our journey started with a simple vision: to deliver quality
-            products at fair prices, right to your doorstep. Today, we continue
-            to grow with the trust of thousands of happy customers who choose
-            Nepal Digital Bazar for their daily shopping needs. Together, let’s
-            redefine online shopping in Nepal—with trust, transparency, and
-            unbeatable service.
           </p>
+          <span className="text-primary font-bold">What sets us apart?</span>
+          <ol className="list-inside list-disc" type="a">
+            <li>
+              <strong> Handpicked Products:</strong> Only the best and most
+              reliable items make it to our shelves.
+            </li>
+            <li>
+              <strong>Affordable Pricing:</strong> We ensure you get unbeatable
+              value for your money.
+            </li>
+            <li>
+              <strong> Customer Satisfaction :</strong> Your happiness is our
+              top priority, and we back every purchase with care and service.
+            </li>
+          </ol>
+          <br></br>
+          Our journey started with a simple vision: to deliver quality products
+          at fair prices, right to your doorstep. Today, we continue to grow
+          with the trust of thousands of happy customers who choose Nepal
+          Digital Bazar for their daily shopping needs. Together, let’s redefine
+          online shopping in Nepal—with trust, transparency, and unbeatable
+          service.
         </div>
       </div>
     </main>

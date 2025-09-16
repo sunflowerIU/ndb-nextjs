@@ -3,24 +3,33 @@ import Button from "./Button";
 
 function ProductCard({ product }) {
   const { name, price, image } = product;
+
   return (
-    <div className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:shadow-lg">
-      <div className="overflow-hidden rounded-xl">
+    <div className="group flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+      {/* Image */}
+      <div className="relative aspect-square w-full overflow-hidden rounded-t-lg bg-gray-50">
         <Image
           src={image}
           alt={`${name} product`}
-          width={300}
-          height={300}
-          quality={100}
-          className="mb-4 h-40 w-full rounded-lg object-contain transition duration-300 group-hover:scale-105"
+          fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 200px"
+          className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
-      <h2 className="font-raleway text-lg font-semibold text-gray-900">
-        {name}
-      </h2>
-      <p className="mt-1 text-sm font-semibold text-gray-700">{price}</p>
 
-      <Button className="mt-3 w-full">Add To Cart</Button>
+      {/* Content */}
+      <div className="flex flex-1 flex-col justify-between p-3">
+        <div>
+          <h2 className="font-raleway line-clamp-2 text-sm font-medium text-gray-900">
+            {name}
+          </h2>
+          <p className="text-primary mt-1 text-base font-semibold">{price}</p>
+        </div>
+
+        <Button className="mt-3 w-full rounded-md py-1.5 text-xs font-semibold">
+          Add To Cart
+        </Button>
+      </div>
     </div>
   );
 }
