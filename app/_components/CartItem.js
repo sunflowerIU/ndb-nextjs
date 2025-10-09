@@ -4,7 +4,7 @@ import { formatCurrency } from "@/_lib/utils";
 
 function CartItem({ item, dispatch }) {
   return (
-    <div className="relative flex min-h-[100px] items-center justify-between gap-4 rounded-xl border border-gray-200 bg-white p-3 shadow-sm transition hover:scale-101 hover:shadow-md">
+    <div className="md:text-md relative flex min-h-[100px] items-center justify-between gap-2 rounded-xl border border-gray-200 bg-white p-3 text-sm shadow-sm transition hover:scale-101 hover:shadow-md md:gap-4 lg:text-lg">
       {/* delete button */}
       <button
         onClick={() => dispatch({ type: "deleteItem", payload: item.id })}
@@ -13,7 +13,7 @@ function CartItem({ item, dispatch }) {
         ×
       </button>
       {/* Image */}
-      <div className="flex-shrink-0">
+      <div className="w-[30px] flex-shrink-0 md:w-[80px] lg:w-[100px]">
         <Image
           src={item.image}
           alt={item.name}
@@ -25,8 +25,10 @@ function CartItem({ item, dispatch }) {
 
       {/* Info */}
       <div className="flex flex-1 flex-col justify-center">
-        <p className="text-base font-semibold text-gray-800">{item.name}</p>
-        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
+        <p className="font-semibold text-gray-800">{item.name}</p>
+        <p className="text-xs text-gray-500 md:text-sm lg:text-base">
+          Qty: {item.quantity}
+        </p>
       </div>
 
       {/* button */}
@@ -36,7 +38,7 @@ function CartItem({ item, dispatch }) {
       </div>
 
       {/* Price */}
-      <p className="text-primary text-lg font-bold">
+      <p className="text-primary font-bold md:text-lg">
         {formatCurrency((item.price * item.quantity).toFixed(2))}
       </p>
     </div>

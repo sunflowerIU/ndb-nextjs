@@ -40,7 +40,7 @@ function Cart() {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 space-y-1.5 overflow-y-auto p-2">
+        <div className="flex-1 space-y-1.5 overflow-y-auto p-2 text-xs">
           {cartItems.length === 0 ? (
             <p className="text-text/70 mt-10 text-center">
               Your cart is empty.
@@ -52,7 +52,7 @@ function Cart() {
           )}
         </div>
         {/* checkout and total price */}
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between py-1 text-sm md:text-lg">
           <h2 className="text-primary font-bold">
             Total Price: {formatCurrency(totalPrice)}
           </h2>
