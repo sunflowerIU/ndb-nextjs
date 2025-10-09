@@ -40,7 +40,7 @@ function Cart() {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 space-y-1.5 overflow-y-auto p-2 text-xs">
+        <div className="flex-1 space-y-1.5 overflow-y-auto text-xs md:p-2">
           {cartItems.length === 0 ? (
             <p className="text-text/70 mt-10 text-center">
               Your cart is empty.
@@ -52,15 +52,17 @@ function Cart() {
           )}
         </div>
         {/* checkout and total price */}
-        <div className="flex flex-row justify-between py-1 text-sm md:text-lg">
-          <h2 className="text-primary font-bold">
-            Total Price: {formatCurrency(totalPrice)}
-          </h2>
-          <button className="text-royal flex cursor-pointer flex-row items-center gap-2 font-bold hover:underline">
-            <span>checkout</span>
-            <FaArrowRightLong />
-          </button>
-        </div>
+        {cartItems.length && (
+          <div className="flex flex-row justify-between py-1 text-sm md:text-lg">
+            <h2 className="text-primary font-bold">
+              Total Price: {formatCurrency(totalPrice)}
+            </h2>
+            <button className="text-royal flex cursor-pointer flex-row items-center gap-2 font-bold hover:underline">
+              <span>checkout</span>
+              <FaArrowRightLong />
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

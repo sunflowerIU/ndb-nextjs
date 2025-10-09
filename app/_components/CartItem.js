@@ -32,7 +32,7 @@ function CartItem({ item, dispatch }) {
       </div>
 
       {/* button */}
-      <div className="space-y-1 space-x-2">
+      <div className="flex items-center justify-between space-x-1">
         <EditCartButton size="small" type="decrement" id={item.id} />
         <EditCartButton size="small" type="increment" id={item.id} />
       </div>
