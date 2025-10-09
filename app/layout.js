@@ -1,6 +1,9 @@
 import { Raleway } from "next/font/google";
 import Header from "./_components/Header";
 import "./globals.css";
+import Cart from "./_components/Cart";
+import { CartProvider } from "./_contexts/CartContext";
+import CartIcon from "./_components/CartIcon";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -16,12 +19,14 @@ export const metadata = {
     "Nepal Digital Bazar. Buy thermos, water bottles and many other different kitchen utilities.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
-    <html className={`bg-secondary`} lang="en">
-      <body>
-        <Header />
-        <div className="relative h-[500px] w-full">{children}</div>
+    <html lang="en" className="bg-secondary">
+      <body className={raleway.className}>
+        <CartProvider>
+          <Header />
+          <main className="relative">{children}</main>
+        </CartProvider>
       </body>
     </html>
   );

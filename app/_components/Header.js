@@ -1,11 +1,15 @@
+import { auth } from "@/_lib/auth";
 import Logo from "./Logo";
 import Navigation from "./Navigation";
 
-function Header() {
+async function Header() {
+  const session = await auth();
+  // console.log(session);
+
   return (
-    <header className="flex text-secondary items-center justify-between bg-primary px-4 py-2">
+    <header className="text-secondary bg-primary flex items-center justify-between px-4 py-2">
       <Logo />
-      <Navigation />
+      <Navigation session={session} />
     </header>
   );
 }

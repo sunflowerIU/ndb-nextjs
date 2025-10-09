@@ -15,7 +15,7 @@ function Footer() {
   return (
     <footer
       id="contact"
-      className="clip-slant-1 my-20 overflow-x-hidden bg-green-900 px-4 py-16 text-green-100 sm:px-6"
+      className="clip-slant-1 my-20 mb-0 overflow-x-hidden bg-green-900 px-4 py-16 text-green-100 sm:px-6"
     >
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-4 md:place-items-start md:gap-10">
         {/* Why Choose Us */}
