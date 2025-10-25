@@ -29,10 +29,12 @@ function HomeProducts() {
         <ShowMoreButton />
       </div>
 
-      {/* Product Grid */}
-      <Suspense fallback={<p>loading....</p>}>
-        <ProductGrid type="others" />
-      </Suspense>
+      <>
+        {/* Product Grid */}
+        <Suspense fallback={<p>loading....</p>}>
+          <ProductGrid type="others" />
+        </Suspense>
+      </>
 
       {/* Bottom Show More (mobile only) */}
       <div className="mx-auto mt-10 flex max-w-[1200px] justify-center sm:hidden">

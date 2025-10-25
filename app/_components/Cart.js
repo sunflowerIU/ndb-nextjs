@@ -1,12 +1,19 @@
 "use client";
 
-import { FaArrowRightLong } from "react-icons/fa6";
-import { useCart } from "../_contexts/CartContext";
-import CartItem from "./CartItem";
 import { formatCurrency } from "@/_lib/utils";
+import { FaArrowRightLong } from "react-icons/fa6";
+import CartItem from "./CartItem";
+import { useCartStore } from "@/store/cart-store";
+import { shallow } from "zustand/shallow";
 
 function Cart() {
-  const { cartItems, cartOpen, setCartOpen, totalPrice, dispatch } = useCart();
+  const cartItems = useCartStore((s) => s.cartItems);
+  const cartOpen = useCartStore((s) => s.cartOpen);
+  const setCartOpen = useCartStore((s) => s.setCartOpen);
+
+  const totalPrice = cartItems.reduce((acc, curr) => {
+    return acc + curr.price * curr.quantity;
+  }, 0);
 
   return (
     <>
@@ -46,13 +53,11 @@ function Cart() {
               Your cart is empty.
             </p>
           ) : (
-            cartItems.map((item) => (
-              <CartItem dispatch={dispatch} key={item.id} item={item} />
-            ))
+            cartItems.map((item) => <CartItem key={item.id} item={item} />)
           )}
         </div>
         {/* checkout and total price */}
-        {cartItems.length && (
+        {cartItems.length > 0 && (
           <div className="flex flex-row justify-between py-1 text-sm md:text-lg">
             <h2 className="text-primary font-bold">
               Total Price: {formatCurrency(totalPrice)}

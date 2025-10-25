@@ -1,14 +1,24 @@
 "use client";
 import Image from "next/image";
 import Button from "./Button";
-import { useCart } from "../_contexts/CartContext";
 import { EditCartButton } from "./EditCartButton";
 import { formatCurrency } from "@/_lib/utils";
+import { toast } from "react-toastify";
+import { useCartStore } from "@/store/cart-store";
 
 function ProductCard({ product }) {
-  const { cartItems, dispatch, calculateQuantityById } = useCart();
   const { name, price, image, id } = product;
-  const onCartAlready = cartItems.find((item) => item.id === id);
+
+  const addToCart = useCartStore((state) => state.addToCart);
+  const onCartAlready = useCartStore((state) =>
+    state.cartItems.find((item) => item.id === id),
+  );
+  const itemQuantity = onCartAlready?.quantity;
+
+  function handleAddToCart() {
+    addToCart(product);
+    toast.success(`Added ${product.name} to the cart`);
+  }
 
   return (
     <div className="group flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
@@ -36,16 +46,17 @@ function ProductCard({ product }) {
 
         {/* add to cart or edit cart */}
         <div>
-          {onCartAlready ? (
+          {Boolean(onCartAlready) ? (
             <div className="text-text flex items-center justify-center gap-5 text-lg">
               <EditCartButton type="decrement" id={id} />
 
-              <span>{calculateQuantityById(id)}</span>
+              <span>{itemQuantity}</span>
               <EditCartButton type="increment" id={id} />
             </div>
           ) : (
             <Button
-              onClick={() => dispatch({ type: "addToCart", payload: product })}
+              onClick={handleAddToCart}
+              // onClick={() => toast.success("added to cart")}
               className="mt-3 w-full rounded-md py-1.5 text-xs font-semibold"
             >
               Add To Cart

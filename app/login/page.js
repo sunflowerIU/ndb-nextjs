@@ -1,15 +1,15 @@
 "use client";
 
 import { createUser, loginUser } from "@/_lib/action";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import Button from "../_components/Button";
-import { Router } from "next/router";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("amit@gmail.com");
+  const [password, setPassword] = useState("12345678");
   const [name, setName] = useState("");
   const router = useRouter();
 
@@ -24,19 +24,28 @@ export default function AuthPage() {
       const response = await loginUser({ email, password });
       // console.log(response);
       if (response) {
-        alert(response.message);
+        toast.error(response.message);
         return;
       } else {
+        toast.success("Logged in successfully", {
+          delay: 500,
+        });
         setInitialState();
         router.refresh();
       }
     } else {
       try {
-        await createUser({ email, password, name });
+        const response = await createUser({ email, password, name });
+        console.log(response);
+        if (response.success === false) {
+          toast.error(response.message);
+          return;
+        }
+        toast.success("Account created successfully. Please login.");
         setInitialState();
         setIsLogin(true);
       } catch (error) {
-        alert(error.message);
+        toast(error.message);
       }
     }
   }

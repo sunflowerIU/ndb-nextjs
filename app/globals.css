@@ -61,4 +61,6 @@
   --color-secondary: #f3f2f1;
   --color-text: oklch(20% 0.005 264.531);
   --color-royal: #0057b7;
+  --toastify-text-color-success: oklch(62.7% 0.194 149.214);
+  /* //#00a63e */
 }

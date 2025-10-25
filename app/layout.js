@@ -2,8 +2,8 @@ import { Raleway } from "next/font/google";
 import Header from "./_components/Header";
 import "./globals.css";
 import Cart from "./_components/Cart";
-import { CartProvider } from "./_contexts/CartContext";
 import CartIcon from "./_components/CartIcon";
+import Notify from "./Notify";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -23,10 +23,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-secondary">
       <body className={raleway.className}>
-        <CartProvider>
-          <Header />
-          <main className="relative">{children}</main>
-        </CartProvider>
+        <Notify />
+        <Header />
+        <main className="relative">{children}</main>
       </body>
     </html>
   );

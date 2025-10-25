@@ -1,9 +1,10 @@
 "use client";
+import { useCartStore } from "@/store/cart-store";
 import { FaCartShopping } from "react-icons/fa6";
-import { useCart } from "../_contexts/CartContext";
 
 function CartIcon() {
-  const { cartOpen, setCartOpen } = useCart();
+  const cartOpen = useCartStore((state) => state.cartOpen);
+  const setCartOpen = useCartStore((state) => state.setCartOpen);
   if (cartOpen) return;
 
   return (

@@ -2,19 +2,40 @@
 
 import { signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
+import { supabaseAdmin } from "./supabaseAdmin";
 
 export async function createUser(formData) {
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-    });
-    // console.log(data);
-    // console.log(error);
-  } catch (error) {
-    if (error) {
-      throw new Error(error.message);
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp(
+      {
+        email: formData.email,
+        password: formData.password,
+      },
+    );
+    if (signUpError)
+      return {
+        success: false,
+        message: signUpError.message,
+      };
+
+    if (signUpData.user) {
+      const { email, id } = signUpData.user;
+      // console.log(formData.fullName);
+
+      const { data: insertData, error: insertError } = await supabase
+        .from("users")
+        .insert({ id, email, fullName: formData.name });
+
+      if (insertError) {
+        await supabaseAdmin.auth.admin.deleteUser(id); // rollback user creation
+        return { success: false, message: insertError.message };
+      }
+      // console.log(insertData);
+      return { success: true, message: "User created successfully" };
     }
+  } catch (error) {
+    console.error("Error creating user:", error.message);
+    return { success: false, message: "Error creating user" };
   }
 }
 
@@ -31,10 +52,22 @@ export async function loginUser({ email, password }) {
 }
 
 export async function logoutUser() {
-  await signOut({
-    redirectTo: "/login",
-  });
+  try {
+    await signOut({ redirect: false });
+    await supabase.auth.signOut();
+    return { success: true, message: "Logged out successfully" };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Logout failed" };
+  }
+}
 
-  //supabase
-  await supabase.auth.signOut();
+// get user by email
+export async function getUser(email) {
+  const userData = await supabaseAdmin
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .single();
+  return userData;
 }
