@@ -20,6 +20,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email,
           password,
         });
+        // console.log(data.session.access_token);
 
         if (!data.user || error) {
           console.error("supabase error: ", error?.message);
@@ -29,7 +30,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return {
           id: data.user.id,
           email: data.user.email,
-          role: data.user.role,
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
         };
       },
     }),
@@ -38,6 +40,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.access_token = user.access_token;
+        token.refresh_token = user.refresh_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.access_token = token.access_token;
+      session.refresh_token = token.refresh_token;
+      return session;
+    },
     authorized: async ({ auth, request }) => {
       const isLoggedIn = Boolean(auth?.user);
       // console.log(isLoggedIn);

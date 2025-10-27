@@ -10,8 +10,9 @@ function ProductCard({ product }) {
   const { name, price, image, id } = product;
 
   const addToCart = useCartStore((state) => state.addToCart);
-  const onCartAlready = useCartStore((state) =>
-    state.cartItems.find((item) => item.id === id),
+  const onCartAlready = useCartStore(
+    (state) => state.cartItems.find((item) => item.id === id),
+    (a, b) => a?.quantity === b?.quantity,
   );
   const itemQuantity = onCartAlready?.quantity;
 

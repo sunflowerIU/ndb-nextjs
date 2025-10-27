@@ -36,7 +36,7 @@ export default function AuthPage() {
     } else {
       try {
         const response = await createUser({ email, password, name });
-        console.log(response);
+        // console.log(response);
         if (response.success === false) {
           toast.error(response.message);
           return;
