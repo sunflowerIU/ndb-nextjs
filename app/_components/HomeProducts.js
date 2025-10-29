@@ -2,16 +2,19 @@ import Link from "next/link";
 import { Suspense } from "react";
 import Button from "./Button";
 import ProductGrid from "./ProductGrid";
+import Spinner from "./Spinner";
+import { getHomeProducts } from "@/_lib/data-service";
 
 function ShowMoreButton() {
   return (
-    <Link href="/all-products">
+    <Link href="/all-products/thermos">
       <Button type="primary">Show More</Button>
     </Link>
   );
 }
 
-function HomeProducts() {
+async function HomeProducts() {
+  const productList = await getHomeProducts();
   return (
     <main id="products" className="px-4 py-12">
       {/* Section header */}
@@ -31,8 +34,8 @@ function HomeProducts() {
 
       <>
         {/* Product Grid */}
-        <Suspense fallback={<p>loading....</p>}>
-          <ProductGrid />
+        <Suspense fallback={<Spinner />}>
+          <ProductGrid productList={productList} />
         </Suspense>
       </>
 

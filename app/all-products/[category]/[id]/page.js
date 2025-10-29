@@ -1,11 +1,9 @@
-import { getProductById, getProducts } from "@/_lib/data-service";
+import { getProductById } from "@/_lib/data-service";
 import { formatCurrency } from "@/_lib/utils";
 import AddToCart from "@/app/_components/AddToCart";
 import MightAlsoLike from "@/app/_components/MightAlsoLike";
-import ProductCard from "@/app/_components/ProductCard";
 import ProductCarousel from "@/app/_components/ProductCarousel";
 import Spinner from "@/app/_components/Spinner";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -22,14 +20,6 @@ export default async function Page({ params }) {
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         {/* Product Image */}
         <div className="relative h-80 w-full overflow-hidden rounded-2xl bg-gray-50 shadow-md md:h-[500px]">
-          {/* <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            priority
-            className="object-contain p-6 transition-transform duration-500 hover:scale-105"
-          />
-          */}
           <ProductCarousel product={product} />
         </div>
 
@@ -57,36 +47,3 @@ export default async function Page({ params }) {
     </div>
   );
 }
-
-// function AddToCartButton({ product }) {
-//   "use client";
-
-//   const addToCart = useCartStore((state) => state.addToCart);
-//   const cartItem = useCartStore((state) =>
-//     state.cartItems.find((item) => item.id === product.id),
-//   );
-
-//   function handleAddToCart() {
-//     addToCart(product);
-//     toast.success(`Added ${product.name} to cart`);
-//   }
-
-//   if (cartItem) {
-//     return (
-//       <div className="flex items-center justify-center gap-5 text-lg">
-//         <EditCartButton type="decrement" id={product.id} />
-//         <span>{cartItem.quantity}</span>
-//         <EditCartButton type="increment" id={product.id} />
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <Button
-//       onClick={handleAddToCart}
-//       className="w-full rounded-lg py-2 text-sm font-semibold sm:w-auto sm:px-8"
-//     >
-//       Add To Cart
-//     </Button>
-//   );
-// }

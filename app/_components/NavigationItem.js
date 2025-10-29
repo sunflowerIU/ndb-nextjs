@@ -6,7 +6,7 @@ function NavigationItem({ setIsOpen, session }) {
   return (
     <>
       <Link
-        href="/all-products"
+        href="/all-products/thermos"
         onClick={() => setIsOpen(false)}
         className="nav-item transition"
       >

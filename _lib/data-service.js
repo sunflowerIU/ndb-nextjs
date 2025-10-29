@@ -12,15 +12,19 @@ export async function getHomeProducts() {
   return products;
 }
 
-export async function getProducts(type) {
-  let query = supabase.from("products").select("*").eq("type", type);
+export async function getProducts(category, currentPage) {
+  console.log(category, currentPage);
+  let query = supabase
+    .from("products")
+    .select("*", { count: "exact" })
+    .eq("type", category)
+    .range(
+      (currentPage - 1) * process.env.NEXT_PUBLIC_ITEMS_LIMIT,
+      currentPage * process.env.NEXT_PUBLIC_ITEMS_LIMIT - 1,
+    );
+  const { data: products, count, error } = await query;
 
-  const { data: products, error } = await query;
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return products;
+  return { products, count, error };
 }
 
 export async function getProductById(id) {

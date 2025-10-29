@@ -5,12 +5,12 @@ import AddToCart from "./AddToCart";
 import Link from "next/link";
 
 function ProductCard({ product }) {
-  const { name, price, cover_image, id } = product;
+  const { name, price, cover_image, id, type } = product;
 
   return (
     <div className="group flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
       {/* Image */}
-      <Link href={`/all-products/${id}`}>
+      <Link href={`/all-products/${type}/${id}`}>
         <div className="relative aspect-square w-full overflow-hidden rounded-t-lg bg-gray-50">
           <Image
             src={cover_image}

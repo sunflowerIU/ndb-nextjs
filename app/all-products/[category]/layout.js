@@ -1,5 +1,5 @@
-import Cart from "../_components/Cart";
-import CartIcon from "../_components/CartIcon";
+import Cart from "../../_components/Cart";
+import CartIcon from "../../_components/CartIcon";
 
 function layout({ children }) {
   return (
