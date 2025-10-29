@@ -1,10 +1,9 @@
 "use client";
 
 import { formatCurrency } from "@/_lib/utils";
+import { useCartStore } from "@/store/cart-store";
 import { FaArrowRightLong } from "react-icons/fa6";
 import CartItem from "./CartItem";
-import { useCartStore } from "@/store/cart-store";
-import { shallow } from "zustand/shallow";
 
 function Cart() {
   const cartItems = useCartStore((s) => s.cartItems);

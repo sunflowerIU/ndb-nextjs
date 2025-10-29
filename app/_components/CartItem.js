@@ -17,7 +17,7 @@ function CartItem({ item }) {
       {/* Image */}
       <div className="w-[30px] flex-shrink-0 md:w-[80px] lg:w-[100px]">
         <Image
-          src={item.image}
+          src={item.cover_image}
           alt={item.name}
           width={60}
           height={60}

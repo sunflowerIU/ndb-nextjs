@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import TypeOptions from "../_components/TypeOptions";
 import ProductGrid from "../_components/ProductGrid";
 import Spinner from "../_components/Spinner";
+import Pagination from "../_components/Pagination";
 
 async function AllProducts({ searchParams }) {
   const params = await searchParams;

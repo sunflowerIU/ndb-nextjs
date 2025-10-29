@@ -32,7 +32,7 @@ function HomeProducts() {
       <>
         {/* Product Grid */}
         <Suspense fallback={<p>loading....</p>}>
-          <ProductGrid type="others" />
+          <ProductGrid />
         </Suspense>
       </>
 
