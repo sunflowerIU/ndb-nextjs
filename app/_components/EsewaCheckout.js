@@ -86,7 +86,7 @@ function EsewaCheckout({ total, transactionId }) {
         type="text"
         id="success_url"
         name="success_url"
-        value="http://localhost:3000/payment/success"
+        value={`${process.env.MY_DOMAIN}/payment/success`}
         required
         readOnly
       />
@@ -95,7 +95,7 @@ function EsewaCheckout({ total, transactionId }) {
         type="text"
         id="failure_url"
         name="failure_url"
-        value="http://localhost:3000/payment/failure"
+        value={`${process.env.MY_DOMAIN}/payment/failure`}
         required
         readOnly
       />
