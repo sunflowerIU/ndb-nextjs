@@ -2,8 +2,8 @@ import { getProducts } from "@/_lib/data-service";
 import ProductCard from "./ProductCard";
 
 async function MightAlsoLike({ product }) {
-  const products = await getProducts(product.type);
-
+  const { products } = await getProducts(product.type, 1);
+  // console.log(products);
   const mightAlsoLike = products
     .filter((item) => item.id !== product.id)
     .slice(0, 4);

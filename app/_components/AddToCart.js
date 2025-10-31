@@ -21,10 +21,10 @@ function AddToCart({ product }) {
     <div>
       {Boolean(onCartAlready) ? (
         <div className="text-text flex items-center justify-center gap-5 text-lg">
-          <EditCartButton type="decrement" id={product.id} />
+          <EditCartButton type="decrement" product={product} />
 
           <span>{itemQuantity}</span>
-          <EditCartButton type="increment" id={product.id} />
+          <EditCartButton type="increment" product={product} />
         </div>
       ) : (
         <Button

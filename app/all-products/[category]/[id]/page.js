@@ -30,6 +30,9 @@ export default async function Page({ params }) {
               {product.name}
             </h1>
             <p className="text-lg text-gray-700">{product.description}</p>
+            <p className="text-primary text-lg font-medium">
+              stock: {product.stock}
+            </p>
 
             <p className="text-primary mt-5 text-3xl font-semibold">
               {formatCurrency(product.price)}

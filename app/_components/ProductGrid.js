@@ -1,4 +1,3 @@
-import { getHomeProducts, getProducts } from "@/_lib/data-service";
 import ProductCard from "./ProductCard";
 
 async function ProductGrid({ productList }) {

@@ -12,6 +12,13 @@ export const useCartStore = create(
         set((state) => {
           const updatedCart = state.cartItems.map((item) => {
             if (item.id === id) {
+              if (!(item.quantity < item.stock - 3)) {
+                return {
+                  ...item,
+                  quantity: item.quantity,
+                };
+              }
+
               return {
                 ...item,
                 quantity: item.quantity + 1,

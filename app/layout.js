@@ -1,13 +1,11 @@
-import { Raleway } from "next/font/google";
+import { Inter } from "next/font/google";
 import Header from "./_components/Header";
 import "./globals.css";
-import Cart from "./_components/Cart";
-import CartIcon from "./_components/CartIcon";
 import Notify from "./Notify";
 
-const raleway = Raleway({
+export const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -22,7 +20,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en" className="bg-secondary">
-      <body className={raleway.className}>
+      <body className={inter.className}>
         <Notify />
         <Header />
         <main className="relative">{children}</main>

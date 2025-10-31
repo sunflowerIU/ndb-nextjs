@@ -35,8 +35,8 @@ function CartItem({ item }) {
 
       {/* button */}
       <div className="flex items-center justify-between space-x-1">
-        <EditCartButton size="small" type="decrement" id={item.id} />
-        <EditCartButton size="small" type="increment" id={item.id} />
+        <EditCartButton size="small" type="decrement" product={item} />
+        <EditCartButton size="small" type="increment" product={item} />
       </div>
 
       {/* Price */}

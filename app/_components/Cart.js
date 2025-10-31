@@ -2,8 +2,8 @@
 
 import { formatCurrency } from "@/_lib/utils";
 import { useCartStore } from "@/store/cart-store";
-import { FaArrowRightLong } from "react-icons/fa6";
 import CartItem from "./CartItem";
+import HandleCheckout from "./HandleCheckout";
 
 function Cart() {
   const cartItems = useCartStore((s) => s.cartItems);
@@ -57,14 +57,11 @@ function Cart() {
         </div>
         {/* checkout and total price */}
         {cartItems.length > 0 && (
-          <div className="flex flex-row justify-between py-1 text-sm md:text-lg">
+          <div className="flex flex-row items-center justify-between py-1 text-sm md:text-lg">
             <h2 className="text-primary font-bold">
               Total Price: {formatCurrency(totalPrice)}
             </h2>
-            <button className="text-royal flex cursor-pointer flex-row items-center gap-2 font-bold hover:underline">
-              <span>checkout</span>
-              <FaArrowRightLong />
-            </button>
+            <HandleCheckout />
           </div>
         )}
       </div>
