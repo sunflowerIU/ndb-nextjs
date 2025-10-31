@@ -13,7 +13,7 @@ export async function getHomeProducts() {
 }
 
 export async function getProducts(category, currentPage) {
-  console.log(category, currentPage);
+  // console.log(category, currentPage);
   let query = supabase
     .from("products")
     .select("*", { count: "exact" })
