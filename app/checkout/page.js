@@ -3,8 +3,16 @@ import { formatCurrency } from "@/_lib/utils";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import EsewaCheckout from "../_components/EsewaCheckout";
+import { auth } from "@/_lib/auth";
+import { getUser } from "@/_lib/action";
 
 async function page({ searchParams }) {
+  const session = await auth();
+  if (!session) return notFound();
+  const { data: userData, error: userError } = await getUser(
+    session.user.email,
+  );
+  // console.log(userData);
   const { checkoutId } = await searchParams;
 
   const { data, error } = await supabaseAdmin
@@ -13,7 +21,11 @@ async function page({ searchParams }) {
     .eq("id", checkoutId)
     .single();
 
-  // console.log(data);
+  // console.log("checkout", data);
+  // console.log("userdata", userData);
+
+  ///if current user id is not equal to checkout_session user_id then return notFOund
+  if (userData.id !== data.user_id) return notFound();
 
   if (error) return notFound("Checkout not found");
 

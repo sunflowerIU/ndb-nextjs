@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Logout from "../_components/Logout";
 import UpdateProfile from "../_components/UpdateProfile";
 import UpdatePassword from "../_components/UpdatePassword";
+import UpdateAddress from "../_components/UpdateAddress";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -13,6 +14,7 @@ export default async function ProfilePage() {
   return (
     <div className="bg-secondary mx-auto max-w-2xl rounded-lg p-6">
       <UpdateProfile data={data} />;{/* logout */}
+      <UpdateAddress data={data} />
       <UpdatePassword />
       <Logout onLogout={logoutUser} />
     </div>

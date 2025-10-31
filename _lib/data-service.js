@@ -5,7 +5,7 @@ export async function getHomeProducts() {
     .from("products")
     .select("*")
     .range(0, 7);
-
+  console.log(error);
   if (error) {
     throw new Error(error.message);
   }

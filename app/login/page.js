@@ -8,8 +8,8 @@ import Button from "../_components/Button";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("amit@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
 
@@ -82,7 +82,7 @@ export default function AuthPage() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="John Doe"
+                placeholder="Enter your name"
                 required
                 className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring focus:ring-blue-300"
               />
@@ -95,7 +95,7 @@ export default function AuthPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="Enter your email"
               required
               className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring focus:ring-blue-300"
             />
@@ -107,7 +107,7 @@ export default function AuthPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder="Enter your password"
               required
               className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring focus:ring-blue-300"
             />

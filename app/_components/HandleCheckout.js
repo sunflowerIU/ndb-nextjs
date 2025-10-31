@@ -4,6 +4,7 @@ import { useCartStore } from "@/store/cart-store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 function HandleCheckout() {
   const router = useRouter();
@@ -27,8 +28,22 @@ function HandleCheckout() {
         }),
       }),
     });
-
     const data = await response.json();
+    // if not authenticated then goto login
+    if (!data.success && data.error === "not_authenticated") {
+      setCartOpen(false);
+      setIsLoading(false);
+
+      router.push("/login");
+    }
+
+    // if delivery address not added then show delivery address error
+    if (!data.success && data.error === "delivery_address") {
+      setCartOpen(false);
+      setIsLoading(false);
+
+      return toast.error(data.message);
+    }
 
     setCartOpen(false);
     setIsLoading(false);

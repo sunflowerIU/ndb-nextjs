@@ -1,3 +1,4 @@
+import { paymentSuccessful } from "@/_lib/action";
 import Button from "@/app/_components/Button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,6 +15,11 @@ async function page({ searchParams }) {
       `https://rc.esewa.com.np/api/epay/transaction/status/?product_code=EPAYTEST&total_amount=${result.total_amount}&transaction_uuid=${result.transaction_uuid}`,
     );
     const finalResponse = await verifyPayment.json();
+    // console.log("finalResponse", finalResponse);
+    //if payment successful then create new payment complete table in database
+    if (finalResponse.status === "COMPLETE") {
+      await paymentSuccessful(finalResponse);
+    }
     return (
       <div className="mx-auto mt-20 max-w-md text-center">
         <h1 className="text-primary mb-4 text-3xl font-semibold">

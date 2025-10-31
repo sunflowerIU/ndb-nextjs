@@ -148,3 +148,71 @@ export async function updatePassword(formData) {
   }
   return { success: true, message: "Password updated successfully" };
 }
+
+///save or update address
+export async function updateAddress(formData) {
+  const address = {
+    contact: formData.get("contact"),
+    province: formData.get("province"),
+    city: formData.get("city"),
+    landmark: formData.get("landmark"),
+    addressLine: formData.get("addressLine"),
+  };
+  const session = await auth();
+  if (!session) return { success: false, message: "user not authenticated" };
+
+  const supabaseServer = await createServerSupabase();
+  const sessionSupabase = await supabaseServer.auth.getUser();
+  // console.log(sessionSupabase.data.user.email);
+
+  const { data, error } = await supabaseServer
+    .from("users")
+    .update([
+      {
+        delivery_address: address,
+      },
+    ])
+    .eq("email", sessionSupabase.data.user.email)
+    .select();
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+  revalidatePath("/profile");
+
+  return { success: true, data };
+}
+
+///payment complete so create a payment complete table in database
+export async function paymentSuccessful(paymentSuccessData) {
+  // console.log("data", paymentSuccessData);
+
+  // 1️⃣ Check if transaction already exists
+  // const { data: existing } = await supabaseAdmin
+  //   .from("payment_success")
+  //   .select("id")
+  //   .eq("transaction_uuid", transaction_uuid)
+  //   .single();
+
+  // if (existing) {
+  //   console.log("Payment already recorded:", transaction_uuid);
+  //   return { success: false, message: "Duplicate ignored" };
+  // }
+
+  //first get that checkout transaction id from checkout and extract user_id
+  const { data: checkoutData, error: checkoutDataError } = await supabaseAdmin
+    .from("checkout_session")
+    .select("user_id")
+    .eq("id", paymentSuccessData.transaction_uuid)
+    .single();
+
+  console.log("checkoutData", checkoutData);
+  // now insert into payment success table
+  const { data: insertData, error: insertError } = await supabaseAdmin
+    .from("payment_success")
+    .insert([{ user_id: checkoutData.user_id, ...paymentSuccessData }])
+    .select();
+
+  // console.log(insertData);
+  // console.log(insertError);
+}
